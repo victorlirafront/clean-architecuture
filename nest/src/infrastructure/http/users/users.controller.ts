@@ -35,7 +35,7 @@ export class UsersController {
   @Get()
   async findAll() {
     const users = await this.listUsers.execute();
-    return users.map(UserViewModel.toHTTP);
+    return users.map((u) => UserViewModel.toHTTP(u));
   }
 
   @Get(':id')

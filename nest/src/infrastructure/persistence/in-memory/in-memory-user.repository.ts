@@ -6,33 +6,34 @@ import { UserRepository } from '../../../domain/users/user-repository';
 export class InMemoryUserRepository implements UserRepository {
   private readonly store = new Map<string, User>();
 
-  async create(user: User): Promise<User> {
+  create(user: User): Promise<User> {
     this.store.set(user.id, user);
-    return user;
+    return Promise.resolve(user);
   }
 
-  async findById(id: string): Promise<User | null> {
-    return this.store.get(id) ?? null;
+  findById(id: string): Promise<User | null> {
+    return Promise.resolve(this.store.get(id) ?? null);
   }
 
-  async findByEmail(email: string): Promise<User | null> {
+  findByEmail(email: string): Promise<User | null> {
     const lower = email.toLowerCase();
     for (const user of this.store.values()) {
-      if (user.email === lower) return user;
+      if (user.email === lower) return Promise.resolve(user);
     }
-    return null;
+    return Promise.resolve(null);
   }
 
-  async findAll(): Promise<User[]> {
-    return Array.from(this.store.values());
+  findAll(): Promise<User[]> {
+    return Promise.resolve(Array.from(this.store.values()));
   }
 
-  async update(user: User): Promise<User> {
+  update(user: User): Promise<User> {
     this.store.set(user.id, user);
-    return user;
+    return Promise.resolve(user);
   }
 
-  async delete(id: string): Promise<void> {
+  delete(id: string): Promise<void> {
     this.store.delete(id);
+    return Promise.resolve();
   }
 }
