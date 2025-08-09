@@ -1,0 +1,20 @@
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; margin: 0; }
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji"; background: #0b1020; color: #e6eaf2; }
+
+.container { max-width: 920px; margin: 0 auto; padding: 24px; }
+.card { background: #121a33; padding: 16px; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,.2); border: 1px solid #1c2a52; }
+.hstack { display: flex; gap: 12px; align-items: center; }
+.vstack { display: flex; flex-direction: column; gap: 12px; }
+.input, .button { padding: 10px 12px; border-radius: 8px; border: 1px solid #2b3b6b; font-size: 14px; }
+.input { background: #0e1530; color: #e6eaf2; width: 100%; }
+.input:focus { outline: none; border-color: #4c7dff; box-shadow: 0 0 0 2px rgba(76,125,255,.2); }
+.button { background: #2a5cff; color: white; cursor: pointer; }
+.button:disabled { opacity: .6; cursor: not-allowed; }
+.table { width: 100%; border-collapse: collapse; }
+.table th, .table td { border-bottom: 1px solid #1c2a52; padding: 10px; text-align: left; }
+.small { color: #9fb0d9; font-size: 12px; }
+.error { color: #ff7b7b; }
+.success { color: #7bffb1; }
+.title { margin: 0 0 8px; }
+.subtle { color: #9fb0d9; } 
