@@ -14,12 +14,19 @@ export class User implements UserProps {
   updatedAt: Date;
 
   constructor(
+    // O parâmetro 'props' combina:
+    // - Omit<UserProps, 'createdAt' | 'updatedAt'>: exige id, name e email
+    // - Partial<Pick<UserProps, 'createdAt' | 'updatedAt'>>: createdAt/updatedAt são opcionais
+    // Isso permite criar um User com datas opcionais; se omitidas, serão definidas abaixo.
     props: Omit<UserProps, 'createdAt' | 'updatedAt'> &
       Partial<Pick<UserProps, 'createdAt' | 'updatedAt'>>,
   ) {
     this.id = props.id;
     this.name = props.name;
+    // Normaliza o email para minúsculas para garantir consistência
     this.email = props.email.toLowerCase();
+    // Define datas padrão: se não vierem no props, usa a data atual
+    // '??' (nullish coalescing) só usa o valor da direita se o da esquerda for null ou undefined
     this.createdAt = props.createdAt ?? new Date();
     this.updatedAt = props.updatedAt ?? new Date();
   }

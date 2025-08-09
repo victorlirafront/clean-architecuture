@@ -6,7 +6,11 @@ import { CreateUserDto } from '../dto/create-user.dto';
 
 @Injectable()
 export class CreateUserUseCase {
+  // Injeta o repositório de usuários via DI do Nest usando o token 'UserRepository'.
+  // O token é resolvido para uma implementação concreta no UsersModule (ex.: InMemoryUserRepository).
   constructor(
+    // 'readonly' impede reatribuir a referência dentro da classe; a dependência
+    // é fixa após o construtor (ainda é possível chamar seus métodos normalmente).
     @Inject('UserRepository') private readonly userRepository: UserRepository,
   ) {}
 

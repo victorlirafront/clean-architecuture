@@ -19,6 +19,8 @@ import { UserViewModel } from './users.view-model';
 @Controller('users')
 export class UsersController {
   constructor(
+    // Injeta automaticamente (via Dependency Injection do NestJS) a instância do caso de uso responsável por criar usuários.
+    // 'private readonly' garante que só será acessível dentro desta classe e não poderá ter seu valor alterado após o construtor.
     private readonly createUser: CreateUserUseCase,
     private readonly listUsers: ListUsersUseCase,
     private readonly getUser: GetUserUseCase,
@@ -26,9 +28,16 @@ export class UsersController {
     private readonly deleteUser: DeleteUserUseCase,
   ) {}
 
+  // Define que este método responderá a requisições HTTP POST na rota associada ao controller
   @Post()
   async create(@Body() dto: CreateUserDto) {
+    //@Body() extrai o corpo da requisição e valida contra o CreateUserDto.
+    // Chama o caso de uso (service/use case) para criar um novo usuário,
+    // passando os dados recebidos no corpo da requisição (dto = Data Transfer Object)
     const user = await this.createUser.execute(dto);
+
+    // Converte o objeto de domínio 'user' para um formato compatível com a resposta HTTP
+    // Isso é útil para evitar expor diretamente a estrutura interna do objeto de domínio
     return UserViewModel.toHTTP(user);
   }
 
